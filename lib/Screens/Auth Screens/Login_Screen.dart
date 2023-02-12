@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -7,6 +5,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:whatsapp_clone/Constant/Auth_Controller.dart';
 import 'package:whatsapp_clone/Constant/ConstColor.dart';
 import 'package:whatsapp_clone/Features/Theme/Custom_Theme.dart';
 import 'package:whatsapp_clone/Screens/Auth%20Screens/Verification_Screen.dart';
@@ -14,15 +13,16 @@ import 'package:whatsapp_clone/Utils/CustomIconButton.dart';
 import 'package:whatsapp_clone/Utils/Custombutton.dart';
 import 'package:whatsapp_clone/Utils/CustomtextField.dart';
 import 'package:whatsapp_clone/Utils/Show_Alert_Dialog.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   late TextEditingController countryNameController;
   late TextEditingController countryCodeController;
   late TextEditingController phoneNumberController;
@@ -66,10 +66,11 @@ class _LoginScreenState extends State<LoginScreen> {
             "The phone number you entered is too long for the country: $countryName",
       );
     }
-    // ref.read(authControllerProvider).sendSmsCode(
-    //       context: context,
-    //       phoneNumber: "+$countryCode$phoneNumber",
-    //     );
+
+    ref.read(authControllerProvider).sendSmsCode(
+          context: context,
+          phoneNumber: "+$countryCode$phoneNumber",
+        );
   }
 
   showCountryCodePicker() {
@@ -97,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     borderSide: BorderSide(color: ConstColor.logoColor2)))),
         onSelect: (country) {
           countryNameController.text = country.name;
-          countryCodeController.text = country.countryCode;
+          countryCodeController.text = country.phoneCode;
         });
   }
 

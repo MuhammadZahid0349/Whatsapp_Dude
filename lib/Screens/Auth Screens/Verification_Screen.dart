@@ -9,7 +9,11 @@ import 'package:whatsapp_clone/Utils/CustomIconButton.dart';
 import 'package:whatsapp_clone/Utils/CustomtextField.dart';
 
 class VerificationScreen extends StatefulWidget {
-  const VerificationScreen({super.key});
+  VerificationScreen(
+      {super.key, required this.verificationId, required this.phoneNumber});
+
+  final String verificationId;
+  final String phoneNumber;
 
   @override
   State<VerificationScreen> createState() => _VerificationScreenState();

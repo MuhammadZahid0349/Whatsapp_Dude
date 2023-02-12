@@ -2,13 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:whatsapp_clone/Constant/ConstColor.dart';
+import 'package:whatsapp_clone/Constant/routes.dart';
 import 'package:whatsapp_clone/Features/Theme/Custom_Theme.dart';
 import 'package:whatsapp_clone/Features/Welcome/pages/privacy_and_terms.dart';
 import 'package:whatsapp_clone/Utils/Custombutton.dart';
 import 'package:whatsapp_clone/Utils/Languagebutton.dart';
 
 class WelcomeScreen extends StatelessWidget {
-  const WelcomeScreen({super.key});
+  WelcomeScreen({super.key});
+
+  naviageToLoginPage(_) {
+    Navigator.of(_).pushNamedAndRemoveUntil(
+      Routes.login,
+      (route) => false,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +49,7 @@ class WelcomeScreen extends StatelessWidget {
               PrivacyAndTerms(),
               10.h.heightBox,
               CustomButton(
-                onPressed: () {},
+                onPressed: () => naviageToLoginPage(context),
                 text: "Agree and Continue",
               ),
               Spacer(),
